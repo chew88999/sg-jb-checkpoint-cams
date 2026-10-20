@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SG–JB Checkpoint Cams</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>SG–JB Checkpoint Cams</h1>
+    <span id="updated" class="muted">Loading cameras…</span>
+    <button id="refresh" type="button">Refresh</button>
+  </header>
+
+  <main>
+    <section id="panel">
+      <div class="card">
+        <h2>Route to JB Sentral</h2>
+        <label for="originSearch">From (Singapore)</label>
+        <div class="row">
+          <input id="originSearch" type="search" placeholder="Address, postal code or place" autocomplete="off">
+          <button id="locate" type="button" title="Use my location">📍</button>
+        </div>
+        <ul id="suggestions" class="suggestions" hidden></ul>
+        <p class="hint">Or click on the map to set the start point.</p>
+
+        <label>To</label>
+        <div class="fixed-dest">🏁 JB Sentral, Johor Bahru</div>
+
+        <button id="go" type="button" class="primary">Find shortest route</button>
+        <div id="routeResult"></div>
+      </div>
+
+      <div class="card">
+        <h2>Checkpoint cameras</h2>
+        <div id="groups"></div>
+      </div>
+    </section>
+
+    <div id="map"></div>
+  </main>
+
+  <div id="lightbox" hidden><img alt=""><p></p></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

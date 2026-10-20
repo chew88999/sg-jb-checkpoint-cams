@@ -1,0 +1,174 @@
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --text: #1c1f24;
+  --muted: #646b75;
+  --border: #dde1e6;
+  --accent: #0b6bcb;
+  --woodlands: #d9480f;
+  --tuas: #1971c2;
+  --best: #2b8a3e;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171a;
+    --surface: #1f2226;
+    --text: #e8eaed;
+    --muted: #9aa1ab;
+    --border: #33373d;
+    --accent: #4dabf7;
+    --woodlands: #ff8a4c;
+    --tuas: #5cb3ff;
+    --best: #69db7c;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+header h1 { font-size: 17px; margin: 0; margin-right: auto; }
+.muted { color: var(--muted); font-size: 12px; }
+
+main { flex: 1; display: flex; min-height: 0; }
+#panel {
+  width: 420px;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#map { flex: 1; min-height: 300px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+.card h2 { font-size: 15px; margin: 0 0 10px; }
+label { display: block; font-weight: 600; margin: 10px 0 4px; font-size: 13px; }
+.hint { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+.row { display: flex; gap: 6px; }
+.row input { flex: 1; }
+
+input, select, button {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 10px;
+}
+select { width: 100%; }
+button { cursor: pointer; }
+button:hover { border-color: var(--accent); }
+button.primary {
+  width: 100%;
+  margin-top: 14px;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+button:disabled { opacity: .6; cursor: wait; }
+
+.suggestions {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.suggestions li { padding: 6px 10px; cursor: pointer; border-bottom: 1px solid var(--border); font-size: 13px; }
+.suggestions li:last-child { border-bottom: 0; }
+.suggestions li:hover { background: var(--bg); }
+
+#routeResult { margin-top: 12px; }
+.option {
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+.option.best { border-color: var(--best); }
+.option .title { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.option .swatch { width: 14px; height: 4px; border-radius: 2px; }
+.option .stats { margin-top: 4px; font-size: 13px; }
+.badge {
+  margin-left: auto;
+  font-size: 11px;
+  background: var(--best);
+  color: #fff;
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+.note { color: var(--muted); font-size: 12px; margin-top: 8px; }
+.error { color: #e03131; margin-top: 8px; }
+
+.group h3 { font-size: 13px; margin: 12px 0 6px; display: flex; gap: 8px; align-items: center; }
+.group:first-child h3 { margin-top: 0; }
+.cams { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cam { margin: 0; cursor: zoom-in; }
+.cam img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--bg);
+  display: block;
+}
+.cam figcaption { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.cam figcaption b { color: var(--text); font-weight: 600; }
+
+.popup img { width: 280px; display: block; border-radius: 4px; }
+.popup p { margin: 4px 0 0; font-size: 12px; }
+
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  cursor: zoom-out;
+  padding: 16px;
+}
+#lightbox[hidden] { display: none; }
+#lightbox img { max-width: 100%; max-height: 85vh; border-radius: 6px; }
+#lightbox p { color: #fff; margin-top: 8px; }
+
+@media (max-width: 800px) {
+  main { flex-direction: column-reverse; }
+  #panel { width: 100%; overflow: visible; }
+  #map { flex: none; height: 50vh; }
+  body { height: auto; }
+}
+
+.fixed-dest {
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  font-weight: 600;
+}
